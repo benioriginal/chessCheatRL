@@ -1,19 +1,40 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>Yes</title>
     <script src="index.js" defer></script>
     <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Prevent scrolling */
+        height: 100%; /* Full height */
+        width: 100%; /* Full width */
+      }
       #wrapper {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        height: 100%;
+        width: 100%;
       }
       button {
         height: 25vh;
         width: 50vw;
+        max-height: 100px; /* Adjust as needed */
+        max-width: 300px; /* Adjust as needed */
+      }
+      #move {
+        position: absolute;
+        bottom: 0;
+        right: 0;
       }
     </style>
   </head>
@@ -23,6 +44,7 @@
       <button id="incre2">+1 a-h</button>
       <button id="send">send</button>
       <button id="mode">mode</button>
+      <p id="move"></p>
     </div>
   </body>
 </html>
