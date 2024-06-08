@@ -2,26 +2,13 @@ const inc1 = document.getElementById("incre1")
 const inc2 = document.getElementById("incre2")
 const send = document.getElementById("send")
 const mode = document.getElementById("mode")
+const mov = document.getElementById("move")
 
 let modee = false
 mode.addEventListener("click", ()=>{
     modee = !modee
 })
-function customVibration(inc1_1, inc2_1, inc1_2, inc2_2) {
-    // Define the big pause duration
-    const bigPause = 1000; // 1 second
-  
-    // Create a pattern array based on the increments and pauses
-    const pattern = [
-      200, inc1_1 * 100, bigPause, // First set with inc1_1
-      200, inc2_1 * 100, bigPause, // First set with inc2_1
-      200, inc1_2 * 100, bigPause, // Second set with inc1_2
-      200, inc2_2 * 100             // Second set with inc2_2
-    ];
-  
-    // Trigger the vibration pattern
-    navigator.vibrate(pattern);
-  }
+
 if (!mode){
     let inc1_1 = 1
     let inc2_1 = 1
@@ -81,18 +68,20 @@ send.addEventListener("click", ()=>{
     }
 })
 function translateMove(move) {
+    mov.innerText(move)
+    navigator.vibrate(200);
+
     // Map the files 'a' to 'h' to numbers 1 to 8
     const fileToNumber = { 'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8 };
     
     // Extract the starting and ending positions from the move
     const [startFile, startRank, endFile, endRank] = move.split('');
-  
+    
     // Translate files to numbers and parse ranks as integers
     let inc1_1 = parseInt(startRank, 10);
     let inc2_1 = fileToNumber[startFile];
     let inc1_2 = parseInt(endRank, 10);
     let inc2_2 = fileToNumber[endFile];
-    customVibration(inc1_1, inc2_1, inc1_2, inc2_2);
     // Log the values or return them as needed
     console.log(`inc1_1: ${inc1_1}, inc2_1: ${inc2_1}, inc1_2: ${inc1_2}, inc2_2: ${inc2_2}`);
     
@@ -210,6 +199,8 @@ send.addEventListener("click", ()=>{
     }
 })
 function translateMove(move) {
+    mov.innerText(move)
+    navigator.vibrate(200);
     // Map the files 'a' to 'h' to numbers 1 to 8
     const fileToNumber = { 'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8 };
     
@@ -221,7 +212,7 @@ function translateMove(move) {
     let inc2_1 = fileToNumber[startFile];
     let inc1_2 = parseInt(endRank, 10);
     let inc2_2 = fileToNumber[endFile];
-    customVibration(inc1_1, inc2_1, inc1_2, inc2_2);
+    
     // Log the values or return them as needed
     console.log(`inc1_1: ${inc1_1}, inc2_1: ${inc2_1}, inc1_2: ${inc1_2}, inc2_2: ${inc2_2}`);
     
