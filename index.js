@@ -45,14 +45,10 @@ send.addEventListener("click", ()=>{
         updateFEN(inc1_1,inc2_1, inc1_2,inc2_2)
         // Execute the function with the FEN position
         postChessApi({
-            fen: FEN,
-            variants: 1,
-            depth: 32,
-            maxThinkingTime: 50,
-            searchmoves: ''
-        }).then((data) => {
-            console.log('Text Response:', data.text);
-            translateMove(data.move);
+            fen: FEN, // Replace 'FEN' with the actual FEN string
+            depth: 15, // Adjust the depth as needed, ensuring it's an integer less than 16
+            // Other parameters can be added if required by the API
+        }).then(() => {
             // Additional data can be logged as needed
         });
         inc1_1 = 1
@@ -131,15 +127,27 @@ function setCharAt(str, index, char) {
     return str.substring(0, index) + char + str.substring(index + 1);
 }
 async function postChessApi(data = {}) {
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data),
-    });
-    return response.json(); // Parses the JSON returned by the API
+    // Construct the query parameters from the data object
+    const queryParams = new URLSearchParams(data).toString();
+
+    // Append the query parameters to the endpoint URL
+    const url = `https://stockfish.online/api/s/v2.php?${queryParams}`;
+
+    // Perform the GET request without a body
+    const response = await fetch(url);
+    const responseData = await response.json(); // Parses the JSON returned by the API
+
+    if (responseData.success) {
+        // Extract only the move part from the 'bestmove' string
+        const move = responseData.bestmove.split(' ')[1];
+        console.log(move, responseData, responseData.bestmove)
+        translateMove(move);
+    } else {
+        // Handle error
+        console.error('Error:', responseData.data);
+    }
 }
+
 }
 else{
     let inc1_1 = 1
@@ -177,14 +185,10 @@ send.addEventListener("click", ()=>{
         updateFEN(inc1_1,inc2_1, inc1_2,inc2_2)
         // Execute the function with the FEN position
         postChessApi({
-            fen: FEN,
-            variants: 1,
-            depth: 32,
-            maxThinkingTime: 50,
-            searchmoves: ''
-        }).then((data) => {
-            console.log('Text Response:', data.text);
-            translateMove(data.move);
+            fen: FEN, // Replace 'FEN' with the actual FEN string
+            depth: 15, // Adjust the depth as needed, ensuring it's an integer less than 16
+            // Other parameters can be added if required by the API
+        }).then(() => {
             // Additional data can be logged as needed
         });
         inc1_1 = 1
@@ -262,13 +266,24 @@ function setCharAt(str, index, char) {
     return str.substring(0, index) + char + str.substring(index + 1);
 }
 async function postChessApi(data = {}) {
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data),
-    });
-    return response.json(); // Parses the JSON returned by the API
+    // Construct the query parameters from the data object
+    const queryParams = new URLSearchParams(data).toString();
+
+    // Append the query parameters to the endpoint URL
+    const url = `https://stockfish.online/api/s/v2.php?${queryParams}`;
+
+    // Perform the GET request without a body
+    const response = await fetch(url);
+    const responseData = await response.json(); // Parses the JSON returned by the API
+
+    if (responseData.success) {
+        // Extract only the move part from the 'bestmove' string
+        const move = responseData.bestmove.split(' ')[1];
+        console.log(move, responseData, responseData.bestmove)
+        translateMove(move);
+    } else {
+        // Handle error
+        console.error('Error:', responseData.data);
+    }
 }
 }
