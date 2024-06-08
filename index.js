@@ -47,7 +47,7 @@ send.addEventListener("click", ()=>{
         postChessApi({
             fen: FEN,
             variants: 1,
-            depth: 12,
+            depth: 32,
             maxThinkingTime: 50,
             searchmoves: ''
         }).then((data) => {
@@ -179,7 +179,7 @@ send.addEventListener("click", ()=>{
         postChessApi({
             fen: FEN,
             variants: 1,
-            depth: 12,
+            depth: 32,
             maxThinkingTime: 50,
             searchmoves: ''
         }).then((data) => {
