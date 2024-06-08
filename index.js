@@ -3,7 +3,7 @@ const inc2 = document.getElementById("incre2")
 const send = document.getElementById("send")
 const mode = document.getElementById("mode")
 const mov = document.getElementById("move")
-
+const url = 'https://corsproxy.io/?' + encodeURIComponent("https://chess-api.com/v1");
 let modee = false
 mode.addEventListener("click", ()=>{
     modee = !modee
@@ -131,7 +131,7 @@ function setCharAt(str, index, char) {
     return str.substring(0, index) + char + str.substring(index + 1);
 }
 async function postChessApi(data = {}) {
-    const response = await fetch("https://chess-api.com/v1", {
+    const response = await fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -262,7 +262,7 @@ function setCharAt(str, index, char) {
     return str.substring(0, index) + char + str.substring(index + 1);
 }
 async function postChessApi(data = {}) {
-    const response = await fetch("https://chess-api.com/v1", {
+    const response = await fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
