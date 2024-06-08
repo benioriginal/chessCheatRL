@@ -68,7 +68,8 @@ send.addEventListener("click", ()=>{
     }
 })
 function translateMove(move) {
-    mov.innerText(move)
+    mov.innerText = move
+
     navigator.vibrate(200);
 
     // Map the files 'a' to 'h' to numbers 1 to 8
@@ -199,7 +200,7 @@ send.addEventListener("click", ()=>{
     }
 })
 function translateMove(move) {
-    mov.innerText(move)
+    mov.innerText = move
     navigator.vibrate(200);
     // Map the files 'a' to 'h' to numbers 1 to 8
     const fileToNumber = { 'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8 };
