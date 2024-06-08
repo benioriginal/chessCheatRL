@@ -1,15 +1,14 @@
 const inc1 = document.getElementById("incre1")
 const inc2 = document.getElementById("incre2")
 const send = document.getElementById("send")
-const mode = document.getElementById("mode")
+const White = document.getElementById("White")
+const Black = document.getElementById("Black")
 const mov = document.getElementById("move")
 const url = 'https://corsproxy.io/?' + encodeURIComponent("https://chess-api.com/v1");
-let modee = false
-mode.addEventListener("click", ()=>{
-    modee = !modee
-})
 
-if (!modee){
+
+White.addEventListener("click",() =>{
+    
     let inc1_1 = 1
     let inc2_1 = 1
     let inc1_2 = 1
@@ -148,8 +147,11 @@ async function postChessApi(data = {}) {
     }
 }
 
-}
-else{
+})
+    
+Black.addEventListener("click",() =>{
+
+
     let inc1_1 = 1
     let inc2_1 = 1
     let inc1_2 = 1
@@ -182,7 +184,7 @@ inc2.addEventListener("click", () =>{
 send.addEventListener("click", ()=>{
     if (send1){
         send1 = false
-        updateFEN(inc1_1,inc2_1, inc1_2,inc2_2)
+        updateFEN1(inc1_1,inc2_1, inc1_2,inc2_2)
         // Execute the function with the FEN position
         postChessApi({
             fen: FEN, // Replace 'FEN' with the actual FEN string
@@ -203,7 +205,7 @@ send.addEventListener("click", ()=>{
         
     }
 })
-function translateMove(move) {
+function translateMove1(move) {
     mov.innerText = move
     navigator.vibrate(200);
     // Map the files 'a' to 'h' to numbers 1 to 8
@@ -221,7 +223,7 @@ function translateMove(move) {
     // Log the values or return them as needed
     console.log(`inc1_1: ${inc1_1}, inc2_1: ${inc2_1}, inc1_2: ${inc1_2}, inc2_2: ${inc2_2}`);
     
-    updateFEN(inc1_1,inc2_1, inc1_2,inc2_2)
+    updateFEN1(inc1_1,inc2_1, inc1_2,inc2_2)
     let rows = FEN.split(' ')[0].split('/');
     let fenParts = FEN.split(' ');
     fenParts[1] = 'w';
@@ -230,7 +232,7 @@ function translateMove(move) {
     FEN = rows.join('/') + ' ' + fenParts.slice(1).join(' ');
 }
 
-function updateFEN(inc1_1, inc2_1, inc1_2, inc2_2) {
+function updateFEN1(inc1_1, inc2_1, inc1_2, inc2_2) {
     // Convert numeric column positions to letters
     const columns = 'abcdefgh';
     const fromCol = columns[inc2_1 - 1];
@@ -258,7 +260,7 @@ function updateFEN(inc1_1, inc2_1, inc1_2, inc2_2) {
     
     // Join the rows to form the new FEN
     FEN = rows.join('/') + ' ' + fenParts.slice(1).join(' ');
-    console.log(FEN);
+    console.log(FEN, fenParts);
 }
 
 // Helper function to replace a character in a string at a specific index
@@ -280,10 +282,10 @@ async function postChessApi(data = {}) {
         // Extract only the move part from the 'bestmove' string
         const move = responseData.bestmove.split(' ')[1];
         console.log(move, responseData, responseData.bestmove)
-        translateMove(move);
+        translateMove1(move);
     } else {
         // Handle error
         console.error('Error:', responseData.data);
     }
 }
-}
+})
