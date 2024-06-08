@@ -9,7 +9,7 @@ mode.addEventListener("click", ()=>{
     modee = !modee
 })
 
-if (!mode){
+if (!modee){
     let inc1_1 = 1
     let inc2_1 = 1
     let inc1_2 = 1
